@@ -11,6 +11,14 @@
 
 <h3>Select</h3>
 <pre>
-  $db->Select( $table  );
-  // Select * from table
+  $db->Select( $table );
+</pre>
+
+<h3>Select with conditions</h3>
+<pre>
+  $conditions = array(
+  	'id' => 1,
+	'created >' => '2016-04-25'
+  );
+  $db->Select( $table , $conditions );
 </pre>
