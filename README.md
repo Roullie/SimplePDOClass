@@ -11,19 +11,18 @@
 
 <h3>Select</h3>
 <pre>
-  $db->Select( $table );
+  $db->Select[$table](  );
 </pre>
-
+`$table` must be capitalized.  Example you have a `table` named `users`,  you should do `$db->SelectUsers( $conditions )`
 <h3>Select with conditions</h3>
 <pre>
   $conditions = array(
   	'id' => 1,
 	'created >' => '2016-04-25'
   );
-  $db->Select( $table , $conditions );
+  $db->SelectUsers( $conditions );
 </pre>
-Alternatively you can use
+Above will produce the query string
 <pre>
-  $db->Select[$table]( $conditions );
+	Select * from users where id = '1' and created > '2016-04-25'
 </pre>
-`$table` must be capitalized.  Example you have a `table` named `users`,  you should do `$db->SelectUsers( $conditions )`
