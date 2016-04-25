@@ -1,4 +1,6 @@
 <?php 
+	include dirname(__FILE__).'/config.php';
+	
     class Dbconnect
     {
         protected $isConnected,$datab,$rowCount=0,$_table=null;
