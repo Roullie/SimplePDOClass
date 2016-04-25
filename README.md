@@ -1,16 +1,15 @@
 # SimplePDOClass
-
-<h2>Database Credentials</h2>
+<h3>Database Credentials</h3>
 <pre>
   Open config.php and enter credentials
 </pre>
 
-<h2>Calling the Dbconnect class</h2>
+<h3>Calling the Dbconnect class</h3>
 <pre>
   $db = new Dbconnect();
 </pre>
 
-<h2>Select</h2>
+<h3>Select</h3>
 <pre>
   $db->Select( $table  );
   // Select * from table
