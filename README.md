@@ -9,3 +9,9 @@
 <pre>
   $db = new Dbconnect();
 </pre>
+
+<h2>Select</h2>
+<pre>
+  $db->Select( $table  );
+  // Select * from table
+</pre>
