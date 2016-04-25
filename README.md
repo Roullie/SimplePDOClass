@@ -22,3 +22,8 @@
   );
   $db->Select( $table , $conditions );
 </pre>
+Alternatively you can use
+<pre>
+  $db->Select[$table]( $conditions );
+</pre>
+`$table` must be capitalized
