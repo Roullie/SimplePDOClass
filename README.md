@@ -244,7 +244,6 @@ You can get the pagination information after doing like this
   );
   $db->SelectUsers( $conditions );
 </pre>
-You can get the pagination information after doing like this
 Above will produce the query string
 <pre>
 	Select * from users where type = '2' and (name like '%John%' or email like '%john@email.com%' or id in (1,3,5))
