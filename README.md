@@ -26,4 +26,4 @@ Alternatively you can use
 <pre>
   $db->Select[$table]( $conditions );
 </pre>
-`$table` must be capitalized
+`$table` must be capitalized.  Example you have a `table` named `users`,  you should do `$db->SelectUsers( $conditions )`
