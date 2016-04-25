@@ -139,3 +139,155 @@ Above will produce the query string
 <pre>
 	Select users.*, images.url, images.type from users left join images on images.user_id = users.id
 </pre>
+
+<h3>Group</h3>
+<pre>
+  $db
+  ->group('images.type')
+  ->columns(array(
+  	'users.*',
+	'images.url',
+	'images.type'
+  ))
+  ->joins(array(
+    'type' => 'left',
+    'table' => 'images',
+	'on' => 'images.user_id = users.id'
+  ))
+  ->SelectUsers(  );
+</pre>
+Above will produce the query string
+<pre>
+	Select users.*, images.url, images.type from users left join images on images.user_id = users.id group by images.type
+</pre>
+
+<h3>Order</h3>
+<pre>
+  $db
+  ->order('images.created desc')
+  ->group('images.type')
+  ->columns(array(
+  	'users.*',
+	'images.url',
+	'images.type'
+  ))
+  ->joins(array(
+    'type' => 'left',
+    'table' => 'images',
+	'on' => 'images.user_id = users.id'
+  ))
+  ->SelectUsers(  );
+</pre>
+Above will produce the query string
+<pre>
+	Select users.*, images.url, images.type from users left join images on images.user_id = users.id order by images.created group by images.type
+</pre>
+
+<h3>Limit</h3>
+<pre>
+  $db
+  ->limit(5)
+  ->order('images.created desc')
+  ->group('images.type')
+  ->columns(array(
+  	'users.*',
+	'images.url',
+	'images.type'
+  ))
+  ->joins(array(
+    'type' => 'left',
+    'table' => 'images',
+	'on' => 'images.user_id = users.id'
+  ))
+  ->SelectUsers(  );
+</pre>
+Above will produce the query string
+<pre>
+	Select users.*, images.url, images.type from users left join images on images.user_id = users.id order by images.created group by images.type limit 5
+</pre>
+
+<h3>Paging</h3>
+<pre>
+
+  $page = 1;  // will get page 1
+
+  $db
+  ->limit( 5 , $page )
+  ->order('images.created desc')
+  ->group('images.type')
+  ->columns(array(
+  	'users.*',
+	'images.url',
+	'images.type'
+  ))
+  ->joins(array(
+    'type' => 'left',
+    'table' => 'images',
+	'on' => 'images.user_id = users.id'
+  ))
+  ->SelectUsers(  );
+</pre>
+You can get the pagination information after doing like this
+<pre>
+	$db->$pgntion
+</pre>
+
+<h3>Or condition</h3>
+<pre>
+  $conditions = array(
+    'type' => 2,
+	'or' => array(
+	  'name like' => '%John%',
+	  'email like' => '%john@email.com%',
+	  'id in' => '(1,3,5)'
+	)
+  );
+  $db->SelectUsers( $conditions );
+</pre>
+You can get the pagination information after doing like this
+Above will produce the query string
+<pre>
+	Select * from users where type = '2' and (name like '%John%' or email like '%john@email.com%' or id in (1,3,5))
+</pre>
+<br /><br />
+<h1>Side note</h1>
+Some cases are not considered thats why you can use the normal prepared statements
+<h2>Insert</h2>
+<pre>
+  $query = "Insert into users ( name , email , type ) values ( :name , :email , :type )";
+  $data = array(
+    'name' => 'John Doe',
+	'email' => 'john@doe.com',
+	'type' => 2
+  );
+  $db->insertRow( $query , $data );
+</pre>
+
+<h2>Select</h2>
+<pre>
+  $query = "Select * users where id = :id";
+  $data = array(
+    'id' => 1
+  );
+  $db->getRow( $query , $data ); // for single result
+  $db->getRows( $query , $data ); // for multiple results
+</pre>
+
+<h2>Update</h2>
+<pre>
+  $query = "Update users set name = :name where type = :type";
+  $data = array(
+    'name' => 'John Doe',
+	'type' => 2
+  );
+  $db->updateRow( $query , $data );
+</pre>
+
+<h2>Delete</h2>
+<pre>
+  $query = "Delete from users where type = :type";
+  $data = array(
+	'type' => 2
+  );
+  $db->deleteRow( $query , $data );
+</pre>
