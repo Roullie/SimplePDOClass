@@ -1,13 +1,28 @@
 # SimplePDOClass
-### Database Credentials
-```
-Open config.php and enter credentials
-```
 
-### Calling the Dbconnect class
-```php
-$db = new Dbconnect();
-```
+## Installation
+
+  - Clone this repo to your project
+  - Open `config.php` and configure it with your database credentials
+  - Import the class into your app
+
+    ```php
+    require_once 'Dbconnect.php';
+    ```
+
+  - Call the class
+
+    ```php
+    // Initializing the class
+    $db = new Dbconnect();
+
+    // Retrieve everything from the users table
+    $db->SelectUsers();
+    ```
+
+  - And you're all set!
+
+## Usage
 
 ### Select
 ```php
