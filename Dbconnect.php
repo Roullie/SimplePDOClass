@@ -246,9 +246,14 @@
                             unset($data[$exp[0]]);
                             $exp[0] = str_replace('.','_',$exp[0]);
                         }
-                        $sql .= ":{$exp[0]} and";
-                        $data[$exp[0]] = $val;
-                        unset($data[$col]);
+                        if( $v !== false ){
+                            $sql .= ":{$expOr[0]} or";
+                            $data[$expOr[0]] = $v;
+                            unset($data[$k]);
+                        }else{
+                            $sql .= implode(" ",array_slice($expOr,2))." or";
+                            unset($data[$k]);
+                        }
                     }else{
                         $sql.=$val . " and";
                         unset($data[$col]);
