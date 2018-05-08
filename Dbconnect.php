@@ -376,6 +376,22 @@
         }
         return $this->deleteRow($sql,$data);
     }
-
+    public function tableColumns( $table ){
+		
+		global $APP_CONFIG;		
+		$query = 'SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = "'.$APP_CONFIG['DATABASE']['dbname'].'" and table_name = :table';
+		return $this->getRows($query,array('table'=>$table));
+		
+	}
+        
+    public function nextId( $table = "" ){		
+		global $APP_CONFIG;
+        $dbname   = $APP_CONFIG['DATABASE']['dbname'];		
+		$query = "SELECT `AUTO_INCREMENT`
+		FROM  INFORMATION_SCHEMA.TABLES
+		WHERE TABLE_SCHEMA = '{$dbname}'
+		AND   TABLE_NAME   = '{$table}'";
+		return $this->getRow($query);
+	}
     }
 ?>
